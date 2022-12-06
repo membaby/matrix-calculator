@@ -119,64 +119,6 @@ class Calculator(QWidget):
       self.layout_buttons.addWidget(self.btn_GaussSeidel, 1, 3)
       self.layout_buttons.addWidget(self.btn_JacobiIteration, 1, 4)
 
-      # # MatrixA Widget
-      # self.matrixA_layout = QGridLayout()
-      # self.matrixA_ = QWidget()
-      # self.matrixA_.setLayout(self.matrixA_layout)
-      # self.matrixA = QLineEdit()
-      # self.matrixA.setPlaceholderText('Matrix A')
-      # self.matrixA_layout.addWidget(self.matrixA, 0, 0, 1, 2)
-
-      # # MatrixB Widget
-      # self.matrixB_layout = QGridLayout()
-      # self.matrixB_ = QWidget()
-      # self.matrixB_.setLayout(self.matrixB_layout)
-      # self.matrixB = QLineEdit()
-      # self.matrixB.setPlaceholderText('Matrix B')
-      # self.matrixB_layout.addWidget(self.matrixB, 0, 0, 1, 2)
-
-
-      # self.layout.addWidget(self.display, 0, 0, 1, 2)
-      # self.layout.addWidget(self.matrixA_, 1, 0)
-      # self.layout.addWidget(self.matrixB_, 1, 1)
-      
-      # # Button Widgets
-      # self.btn_1 = QPushButton("1")
-      # self.btn_2 = QPushButton("2")
-      # self.btn_3 = QPushButton("3")
-      # self.btn_4 = QPushButton("4")
-      # self.btn_5 = QPushButton("5")
-      # self.btn_6 = QPushButton("6")
-      # self.btn_7 = QPushButton("7")
-
-      # # Matrix A Widgets
-      
-
-      # # Tree Widget
-      # self.panel = QTreeWidget()
-      # self.panel.setColumnCount(5)
-      # self.panel.setHeaderLabels(['ID', 'Scraper', 'Status', 'Schedule', 'Last Run'])
-      # self.panel.setColumnWidth(0, 25)
-      # self.panel.setColumnWidth(1, 175)
-      # self.panel.setColumnWidth(2, 100)
-      # self.panel.setColumnWidth(3, 100)
-      # self.panel.setColumnWidth(4, 100)
-
-      # # Label Widgets
-      # self.lbl_PERFORMANCE = QLabel('CPU: 0 - RAM: 0')
-      # self.lbl_PROGRESS = QLabel('Nothing is Running')
-
-      # grid.addWidget(self.panel, 2, 0, 9, 1)
-
-      # grid.addWidget(self.btn_START, 3, 2)
-      # grid.addWidget(self.btn_STOP, 4, 2)
-      # grid.addWidget(self.btn_SCHEDULE, 5, 2)
-      # grid.addWidget(self.btn_LOGS, 6, 2)
-      # grid.addWidget(self.btn_ADD, 7, 2)
-      # grid.addWidget(self.btn_REM, 8, 2)
-      # grid.addWidget(self.btn_CLOSE, 10, 2)
-
-
 
 app = QApplication(sys.argv)
 ex = Calculator()
