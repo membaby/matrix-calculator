@@ -1,10 +1,17 @@
 import copy
+import numpy as np
+from math import log10, floor
 
-def Jacobi(coefficientMatrix, b, initialGuess, showSteps, relativeError):
+
+def round_sig(x, sig=5):
+   return round(x, sig-int(floor(log10(abs(x))))-1) 
+
+def Jacobi(coefficientMatrix, b, initialGuess, relativeError):
     temp = copy.deepcopy(initialGuess)
     x = copy.deepcopy(initialGuess)
     maxNoIterations = 0
     e = relativeError
+    steps = []
     while (maxNoIterations != 100 and e >= relativeError):
         e = 0
         for i in range(len(b)):
@@ -12,7 +19,7 @@ def Jacobi(coefficientMatrix, b, initialGuess, showSteps, relativeError):
             for j in range(len(b)):
                 if i != j:
                     numerator -= x[j]*coefficientMatrix[i][j]
-            temp[i] = numerator / coefficientMatrix[i][i]
+            temp[i] = round_sig(numerator / coefficientMatrix[i][i])
 
         #take e after each iterartion 
         for i in range(len(b)):
@@ -24,10 +31,9 @@ def Jacobi(coefficientMatrix, b, initialGuess, showSteps, relativeError):
 
         maxNoIterations += 1
 
-        if showSteps == True:
-            print ("Iteration (", maxNoIterations, "):", "x = ", x , "And error in it is ", e)
+        steps.append("Iteration (" + str(maxNoIterations) + "):x = " + str(x) + " And error in it: " + str(e))
          
-    print ("Jacobi Final Result : x = ", x)
+    return x, steps
 
 # ------------------ Main program -------------------------------#
 a = [
@@ -38,4 +44,7 @@ a = [
     
 b = [11, 3, 16]
 initialGuess = [1, 1, 1]
-Jacobi(a, b, initialGuess, True, 0.1)
+result, steps = Jacobi(a, b, initialGuess, 0.1)
+print (result)
+for i in range (len(steps)):
+    print (steps[i], "\n")
