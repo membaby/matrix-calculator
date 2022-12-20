@@ -5,17 +5,19 @@ import numpy as np
 class GaussJordan:
 
     def __init__(self):
-        self.operation_name = 'Gauss Jordan Eliminaiton'
+        self.operation_name = 'Gauss Jordan Elimination'
         self.solution = []
         self.solution_steps = []
 
-    def round_sig(self, x, digits=6):
+    @staticmethod
+    def round_sig(x, digits=6):
         if x == 0 or not math.isfinite(x):
             return x
         digits -= math.ceil(math.log10(abs(x)))
         return round(x, digits)
 
-    def partialPivoting(self, input_matrix, b, rows, curr):
+    @staticmethod
+    def partial_pivoting(input_matrix, b, rows, curr):
         # find the pivot row
         pivot = curr
         for i in range(curr + 1, rows):
@@ -28,17 +30,18 @@ class GaussJordan:
             tmp = input_matrix[curr]
             input_matrix[curr] = input_matrix[pivot]
             input_matrix[pivot] = tmp
-            augTmp = b[curr]
+            aug_tmp = b[curr]
             b[curr] = b[pivot]
-            b[pivot] = augTmp
+            b[pivot] = aug_tmp
 
-    def checkRank(self, input_matrix):
+    @staticmethod
+    def check_rank(input_matrix):
         rank = np.linalg.matrix_rank(input_matrix)
         return rank
 
-    def getSolution(self, input_matrix, precision=6):
+    def get_solution(self, input_matrix, precision=6):
 
-        rankAugA = self.checkRank(input_matrix)  # rank of augmented matrix
+        rank_aug_a = self.check_rank(input_matrix)  # rank of augmented matrix
         rows = len(input_matrix)
         # last column is the augmented matrix
         columns = len(input_matrix[0]) - 1
@@ -54,18 +57,18 @@ class GaussJordan:
         for i in range(rows):
             input_matrix[i] = input_matrix[i][0:columns]
 
-        rankA = self.checkRank(input_matrix)  # rank of matrix
+        rank_a = self.check_rank(input_matrix)  # rank of matrix
 
         # check if the system has one solution, infinite solutions or no solution
-        if rankA < rankAugA:
+        if rank_a < rank_aug_a:
             return 'No solution'
-        elif rankA == rankAugA:
-            if rankA < columns:
+        elif rank_a == rank_aug_a:
+            if rank_a < columns:
                 return 'Infinite solutions'
 
         # forward elimination
         for i in range(rows):
-            self.partialPivoting(input_matrix, b, rows, i)
+            self.partial_pivoting(input_matrix, b, rows, i)
             self.solution_steps.append([row[:] for row in input_matrix])
             for j in range(i + 1, columns):
                 multiplier = input_matrix[j][i] / input_matrix[i][i]
@@ -102,7 +105,7 @@ if __name__ == '__main__':
         [1, 0, 2, -1, 1],
         [1, 2, 0, 0, 12]
     ]
-    solution_steps, solutions = test_class.getSolution(
+    solution_steps, solutions = test_class.get_solution(
         test_matrix, precision=6)
     print(solution_steps)
     print(solutions)
