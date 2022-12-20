@@ -6,12 +6,21 @@ from math import log10, floor
 def round_sig(x, sig=5):
    return round(x, sig-int(floor(log10(abs(x))))-1) 
 
-def GaussSedial(coefficientMatrix, b, initialGuess, relativeError):
+def check(coefficientMatrix):
+    for i in range (len (coefficientMatrix)):
+        if coefficientMatrix [i][i] == 0 :
+            return False
+
+    return True
+
+def GaussSedial(coefficientMatrix, b, initialGuess, relativeError, MAX = 100):
+
+
     x = initialGuess
-    maxNoIterations = 0
+    maxNoIterations = MAX
     e = relativeError
     steps = []
-    while (maxNoIterations != 100 and e >= relativeError):
+    while (maxNoIterations != 0 and e >= relativeError):
         e = 0
         for i in range(len(b)):
             numerator = b[i]
@@ -25,9 +34,9 @@ def GaussSedial(coefficientMatrix, b, initialGuess, relativeError):
             newError = (abs(newX - oldX) / newX) * 100
             e = max(e, newError)
         
-        maxNoIterations += 1
+        maxNoIterations -= 1
 
-        steps.append("Iteration (" + str(maxNoIterations) + "):x = " + str(x) + " And error in it: " + str(e))
+        steps.append("Iteration (" + str(MAX - maxNoIterations) + "):x = " + str(x) + " And error in it: " + str(e))
             
     return x, steps
 
@@ -44,3 +53,18 @@ result, steps = GaussSedial(a, b, initialGuess, 0.8)
 print (result)
 for i in range (len(steps)):
     print (steps[i], "\n")
+
+
+# pesoudo code for seidel
+
+# while (maxNoIterations != 0 and e >= relativeError){ // while loop for iterations
+
+#     for bi : (i = 1 to n){ //iteration to calculate xi
+#         numerator = b[i]
+#         for  xj : (j = 1 to n , j != i){ // itetation to calculate numerator
+#             subtract from numerator x[j] * coefficient (corresponding coefficient)
+#         }
+#         x[i] = (numerator / coefficientMatrix[i][i]) // update xi
+#         compute error = ((xi new - xi old) / (xi new)) * 100
+#     }
+# }
