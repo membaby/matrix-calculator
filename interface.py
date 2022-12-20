@@ -229,7 +229,7 @@ class Calculator(QWidget):
             [5, -1, 4, -5],
             [4, -2, 2, 2]
          ]
-         solution, steps = solver.getSolution(matrix)
+         solution, steps = solver.get_solution(matrix)
       elif method == 'GaussJordan':
          solver = GaussJordan()
          matrix = [
