@@ -1,15 +1,18 @@
 import copy
+from math import *
 
 
 class LUDecomposition:
     def __init__(self):
         self.operation_name = 'Gauss Elimination'
         self.n = 0
+        self.sig = 5
         self.solution = []
         self.solution_steps = []
         self.order = []
 
-    def get_solution(self, input_matrix, form):
+    def get_solution(self, input_matrix, form, sig=5):
+        self.sig = sig
         self.n = len(input_matrix)
         self.order = [k + 1 for k in range(self.n)]
         for l in range(self.n):
@@ -26,6 +29,11 @@ class LUDecomposition:
         elif form == 'doolittle':
             self.doolittle(input_matrix)
         return self.solution, self.solution_steps
+
+    def round_sig(self, x):
+        if x == 0:
+            return 0
+        return round(x, self.sig - int(floor(log10(abs(x)))) - 1)
 
     def forward_elimination(self, input_matrix):
         for k in range(self.n):
@@ -54,27 +62,27 @@ class LUDecomposition:
                     input_matrix[k][h] = temp
 
             for l in range(k + 1, self.n):
-                input_matrix[l][k] = (input_matrix[l][k]) / input_matrix[k][k]
+                input_matrix[l][k] = self.round_sig((input_matrix[l][k]) / input_matrix[k][k])
                 for j in range(k + 1, self.n):
-                    input_matrix[l][j] = round(input_matrix[l][j] - input_matrix[k][j] * input_matrix[l][k], 8)
+                    input_matrix[l][j] = self.round_sig(input_matrix[l][j] - input_matrix[k][j] * input_matrix[l][k])
 
         return "Have a unique solution"
 
     def forward_substitution(self, input_matrix, ones):
         for k in range(self.n):
             for j in range(k):
-                self.solution[k] -= input_matrix[k][j] * self.solution[j]
+                self.solution[k] -= self.round_sig(input_matrix[k][j] * self.solution[j])
 
             if not ones:
-                self.solution[k] = (self.solution[k] / input_matrix[k][k])
+                self.solution[k] = self.round_sig(self.solution[k] / input_matrix[k][k])
 
     def back_substitution(self, input_matrix, ones):
         for k in range(self.n - 1, -1, -1):
             for j in range(k + 1, self.n):
-                self.solution[k] -= input_matrix[k][j] * self.solution[j]
+                self.solution[k] -= self.round_sig(input_matrix[k][j] * self.solution[j])
 
             if not ones:
-                self.solution[k] = (self.solution[k] / input_matrix[k][k])
+                self.solution[k] = self.round_sig(self.solution[k] / input_matrix[k][k])
 
     def transpose(self, matrix):
         for l in range(self.n):
@@ -114,13 +122,13 @@ class LUDecomposition:
         self.solution_steps.append(text)
         solution = self.solution
         for o in range(self.n):
-            self.solution[self.order[o] - 1] = solution[o]
+            self.solution[self.order[o] - 1] = self.round_sig(solution[o])
 
     def cholesky(self, input_matrix):
         self.reorder()
         d = [[0 for _ in range(self.n)] for _ in range(self.n)]
-        l = d
-        u = l
+        l = copy.deepcopy(d)
+        u = copy.deepcopy(l)
         for k in range(self.n):
             l[k][k] = 1
             for j in range(k):
@@ -128,6 +136,7 @@ class LUDecomposition:
             u[k][k] = 1
             d[k][k] = input_matrix[k][k]
             for j in range(k + 1, self.n):
+                input_matrix[k][j] /= input_matrix[k][k]
                 u[k][j] = input_matrix[k][j]
         text = f'Cholesky\'s LU:'
         self.solution_steps.append(text)
@@ -146,6 +155,8 @@ class LUDecomposition:
         self.back_substitution(input_matrix, True)
         text = f'{var}      {self.solution}'
         self.solution_steps.append(text)
+        for o in range(self.n):
+            self.solution[o] = self.round_sig(self.solution[o])
 
     def doolittle(self, input_matrix):
         self.reorder()
@@ -170,17 +181,22 @@ class LUDecomposition:
         self.back_substitution(input_matrix, False)
         text = f'{var}      {self.solution}'
         self.solution_steps.append(text)
+        for o in range(self.n):
+            self.solution[o] = self.round_sig(self.solution[o])
 
 
 if __name__ == '__main__':
     test_class = LUDecomposition()
     test_matrix = [
-        [2, 6, 7],
-        [1, 3, 5]
+        [2, 1, 1, 1, 1, 4],
+        [1, 2, 1, 1, 1, 5],
+        [1, 1, 2, 1, 1, 6],
+        [1, 1, 1, 2, 1, 7],
+        [1, 1, 1, 1, 2, 8]
     ]
-    test = test_class.get_solution(copy.deepcopy(test_matrix), 'doolittle')
+   # test = test_class.get_solution(copy.deepcopy(test_matrix), 'doolittle')
+    #print(test)
+    test = test_class.get_solution(copy.deepcopy(test_matrix), 'crout', 10)
     print(test)
-    test = test_class.get_solution(copy.deepcopy(test_matrix), 'crout')
-    print(test)
-    test = test_class.get_solution(copy.deepcopy(test_matrix), 'cholesky')
-    print(test)
+   # test = test_class.get_solution(copy.deepcopy(test_matrix), 'cholesky')
+    #print(test)
