@@ -18,10 +18,10 @@ class JacobiIteration:
         b = [x[-1] for x in matrix]
         temp = copy.deepcopy(initialGuess)
         x = copy.deepcopy(initialGuess)
-        maxNoIterations = 0
+        maxNoIterations = MAX
         e = relativeError
-        print(temp, x, maxNoIterations, e)
-        while (maxNoIterations != MAX and e >= relativeError):
+
+        while (maxNoIterations != 0 and e >= relativeError):
             e = 0
             for i in range(len(b)):
                 numerator = b[i]
@@ -30,16 +30,17 @@ class JacobiIteration:
                         numerator -= x[j]*coefficientMatrix[i][j]
                 temp[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
 
-            # take e after each iteration
+            #take e after each iterartion 
             for i in range(len(b)):
-                if temp[i] != 0:
-                    newError = (abs(temp[i]-x[i]) / temp[i]) * 100
+                if temp[i] != 0 :
+                    newError = (abs(temp[i]-x[i]) / abs(temp[i])) * 100
                     e = max(e, newError)
 
             # after end of each iteration take a copy to x
             x = copy.deepcopy(temp)
-            maxNoIterations += 1
-            text = f'Iteration [{maxNoIterations}]: X = {x} (E: {e})'
+
+            maxNoIterations -= 1
+            text = f'Iteration [{MAX - maxNoIterations}]: X = {x} (E: {e})'
             self.solution_steps.append(text)
         self.solution = x
         return self.solution, self.solution_steps

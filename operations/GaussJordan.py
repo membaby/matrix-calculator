@@ -85,7 +85,7 @@ class GaussJordan:
                 b[j] = self.round_sig(b[j] - multiplier * b[i], precision)
 
         # get the solution
-        for i in range(rows - 1, -1, -1):
+        for i in range(rows):
             b[i] = self.round_sig(b[i] / input_matrix[i][i], precision)
             input_matrix[i][i] = input_matrix[i][i] / input_matrix[i][i]
             x = self.round_sig(b[i] / input_matrix[i][i], precision)

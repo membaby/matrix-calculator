@@ -239,6 +239,8 @@ class Calculator(QWidget):
             for i in range(len(matrix)):
                if matrix[i][i] == 0 :
                   self.display('[ERROR] Diagonal element cannot be zero!')
+                  self.displaySolution('Gauss Seidel', ['There is no solution.', 'Diagonal element cannot be zero!'])
+                  self.displaySteps('Gauss Seidel', ['There is no solution.', 'Diagonal element cannot be zero!'])
                   return False
             solver = GaussSeidel()
             solution, steps = solver.getSolution(matrix, task['initial_guess'], task['tolerance'], task['number_of_iterations'], task['precision'])
@@ -247,6 +249,8 @@ class Calculator(QWidget):
             for i in range(len(matrix)):
                if matrix[i][i] == 0 :
                   self.display('[ERROR] Diagonal element cannot be zero!')
+                  self.displaySolution('Jacobi Iteration', ['There is no solution.', 'Diagonal element cannot be zero!'])
+                  self.displaySteps('Jacobi Iteration', ['There is no solution.', 'Diagonal element cannot be zero!'])
                   return False
             solver = JacobiIteration()
             solution, steps = solver.getSolution(matrix, task['initial_guess'], task['tolerance'], task['number_of_iterations'], task['precision'])

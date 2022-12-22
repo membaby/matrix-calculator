@@ -21,7 +21,11 @@ class GaussElimination:
             flag = self.forward_elimination(input_matrix)
             if flag == 'Have a unique solution':
                 self.back_substitution(input_matrix)
-                return [round(x, 8) for x in self.solutions], self.solution_steps
+                for idx in range(len(self.solutions)):
+                    self.solutions[idx] = f'X{idx} = ' + str(self.solutions[idx])
+                return self.solutions, self.solution_steps
+           
+                # return [round(x, 8) for x in self.solutions], self.solution_steps
             elif flag == 'Singular and have no solution':
                 return ['The entered matrix is singular\nTherefore, no solution!'], ['No steps found']
             else:
