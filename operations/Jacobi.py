@@ -9,26 +9,32 @@ class JacobiIteration:
         self.solution_steps = []
     
     def round_sig(self, x, sig=5):
-        return round(x, sig-int(floor(log10(abs(x))))-1) 
+        if x == 0:
+            return 0
+        return round(x, sig-int(floor(log10(abs(x))))-1)
 
-    def getSolution(self, coefficientMatrix, b, initialGuess, relativeError):
+    def getSolution(self, matrix, initialGuess, relativeError, MAX, precision):
+        coefficientMatrix = [x[:-1] for x in matrix]
+        b = [x[-1] for x in matrix]
         temp = copy.deepcopy(initialGuess)
         x = copy.deepcopy(initialGuess)
         maxNoIterations = 0
         e = relativeError
-        while (maxNoIterations != 100 and e >= relativeError):
+        print(temp, x, maxNoIterations, e)
+        while (maxNoIterations != MAX and e >= relativeError):
             e = 0
             for i in range(len(b)):
                 numerator = b[i]
                 for j in range(len(b)):
                     if i != j:
                         numerator -= x[j]*coefficientMatrix[i][j]
-                temp[i] = self.round_sig(numerator / coefficientMatrix[i][i])
+                temp[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
 
             #take e after each iterartion 
             for i in range(len(b)):
-                newError = (abs(temp[i]-x[i]) / temp[i]) * 100
-                e = max(e, newError)
+                if temp[i] != 0:
+                    newError = (abs(temp[i]-x[i]) / temp[i]) * 100
+                    e = max(e, newError)
 
             # after end of each iteration take a copy to x
             x = copy.deepcopy(temp)
