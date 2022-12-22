@@ -19,15 +19,15 @@ class GaussElimination:
         self.solutions = [0 for _ in range(self.n)]
         try:
             flag = self.forward_elimination(input_matrix)
-            if flag == "Have a unique solution":
+            if flag == 'Have a unique solution':
                 self.back_substitution(input_matrix)
                 return [round(x, 8) for x in self.solutions], self.solution_steps
-            elif flag == "Singular and have no solution":
-                return ["The entered matrix is singular\nTherefore, no solution!"], ["No steps found"]
+            elif flag == 'Singular and have no solution':
+                return ['The entered matrix is singular\nTherefore, no solution!'], ['No steps found']
             else:
                 return self.infinite_number(input_matrix, flag), self.solution_steps
         except:
-            return ["Infinite number of solutions!"], ["An infinite number of solutions was found for this set of equations!"] 
+            return ['Infinite number of solutions!'], ['An infinite number of solutions was found for this set of equations!'] 
 
     def forward_elimination(self, input_matrix):
         for k in range(self.n):
@@ -48,7 +48,7 @@ class GaussElimination:
                 if input_matrix[k][self.n] == 0:
                     return k
                 else:
-                    return "Singular and have no solution"
+                    return 'Singular and have no solution'
 
             if i_max != k:
                 for h in range(self.n + 1):
@@ -65,7 +65,7 @@ class GaussElimination:
                 for j in range(k + 1, self.n + 1):
                     input_matrix[i][j] = self.round_sig(input_matrix[i][j] - input_matrix[k][j] * factor)
 
-        return "Have a unique solution"
+        return 'Have a unique solution'
 
     def back_substitution(self, input_matrix):
         for i in range(self.n - 1, -1, -1):
