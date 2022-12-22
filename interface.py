@@ -207,7 +207,7 @@ class Calculator(QWidget):
       self.display('[INFO]: Matrix Cleared')
       
    def solve(self):
-      # try:
+      try:
          start = time.time()
          self.display('[PROGRESS] Getting ready to solve the matrix...')
          matrix = self.getMatrix()
@@ -258,9 +258,9 @@ class Calculator(QWidget):
          self.displaySteps(solver.operation_name, steps)
          self.display(f'[INFO] Solution is ready! ({total_time} seconds taken!)')
          self.saveMatrix()
-      # except Exception as err:
-      #    print(err)
-      #    self.display('[ERROR] Something went wrong! Please try again!')
+      except Exception as err:
+         print(err)
+         self.display('[ERROR] Something went wrong! Please try again!')
    
    def displaySolution(self, method, solution):
       text = '>> ' + method + ' Solution:\n------------------------------------\n\n'
