@@ -7,12 +7,13 @@ class GaussSeidel:
         self.solution = []
         self.solution_steps = []
     
-    def round_sig(self, x, sig=5):
+    def round_sig(self, x, sig):
         if x == 0:
             return 0
         return round(x, sig-int(floor(log10(abs(x))))-1)
 
     def getSolution(self, matrix, initialGuess, relativeError, MAX, precision):
+        print(matrix, initialGuess, relativeError, MAX, precision)
         coefficientMatrix = [x[:-1] for x in matrix]
         b = [x[-1] for x in matrix]
         x = initialGuess
@@ -24,13 +25,14 @@ class GaussSeidel:
                 numerator = b[i]
                 for j in range(len(b)):
                     if i != j:
-                        numerator -= x[j] * coefficientMatrix[i][j]
+                        numerator -= x[j]*coefficientMatrix[i][j]
 
-                oldX = x[i]
+                oldX = x[i]    
+                    
                 x[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
                 newX = x[i]
                 if x[i] != 0 :
-                    newError = (abs(newX - oldX) / newX) * 100
+                    newError = (abs(newX - oldX) / abs(newX)) * 100
                     e = max(e, newError)
             
             maxNoIterations -= 1
