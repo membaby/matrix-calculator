@@ -5,7 +5,7 @@ import numpy as np
 class GaussJordan:
 
     def __init__(self):
-        self.operation_name = 'Gauss Jordan Eliminaiton'
+        self.operation_name = 'Gauss Jordan Elimination'
         self.solution = []
         self.solution_steps = []
 
@@ -28,9 +28,9 @@ class GaussJordan:
             tmp = input_matrix[curr]
             input_matrix[curr] = input_matrix[pivot]
             input_matrix[pivot] = tmp
-            augTmp = b[curr]
+            aug_tmp = b[curr]
             b[curr] = b[pivot]
-            b[pivot] = augTmp
+            b[pivot] = aug_tmp
 
     def checkRank(self, input_matrix):
         rank = np.linalg.matrix_rank(input_matrix)
@@ -49,7 +49,6 @@ class GaussJordan:
 
         b = [input_matrix[i][columns]
              for i in range(columns)]  # set the last column as b
-
 
         # extract the b part from input matrix
         for i in range(rows):
@@ -107,12 +106,6 @@ if __name__ == '__main__':
         [1, 0, -1, 1],
     ]
 
-    [
-        10.1765,
-        4.94118,
-        5.35292,
-        1.29411
-    ]
     solution_steps, solutions = test_class.getSolution(
         test_matrix, precision=6)
     print(solution_steps)

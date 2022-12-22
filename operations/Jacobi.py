@@ -1,6 +1,6 @@
 import copy
-import numpy as np
 from math import log10, floor
+
 
 class JacobiIteration:
     def __init__(self):
@@ -30,7 +30,7 @@ class JacobiIteration:
                         numerator -= x[j]*coefficientMatrix[i][j]
                 temp[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
 
-            #take e after each iterartion 
+            # take e after each iteration
             for i in range(len(b)):
                 if temp[i] != 0:
                     newError = (abs(temp[i]-x[i]) / temp[i]) * 100
@@ -38,18 +38,21 @@ class JacobiIteration:
 
             # after end of each iteration take a copy to x
             x = copy.deepcopy(temp)
-            maxNoIterations += 1
-            text = f'Iteration [{maxNoIterations}]: X = {x} (E: {e})'
+            max_no_iterations += 1
+            text = f'Iteration [{max_no_iterations}]: X = {x} (E: {e})'
             self.solution_steps.append(text)
         self.solution = x
         return self.solution, self.solution_steps
 
+
 if __name__ == '__main__':
     test_class = JacobiIteration()
-    test_matrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
+    a = [
+        [12, 3, -5],
+        [1, 5, 3],
+        [3, 7, 13]
     ]
-    test = test_class.getSolution(test_matrix)
+    bs = [1, 28, 76]
+    initialGuess = [1, 0, 1]
+    test = test_class.get_solution(a, bs, initialGuess, 0.8)
     print(test)
