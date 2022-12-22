@@ -38,8 +38,8 @@ class JacobiIteration:
 
             # after end of each iteration take a copy to x
             x = copy.deepcopy(temp)
-            max_no_iterations += 1
-            text = f'Iteration [{max_no_iterations}]: X = {x} (E: {e})'
+            maxNoIterations += 1
+            text = f'Iteration [{maxNoIterations}]: X = {x} (E: {e})'
             self.solution_steps.append(text)
         self.solution = x
         return self.solution, self.solution_steps

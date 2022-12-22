@@ -24,7 +24,7 @@ class GaussSeidel:
                 numerator = b[i]
                 for j in range(len(b)):
                     if i != j:
-                        numerator -= x[j] * coefficient_matrix[i][j]
+                        numerator -= x[j] * coefficientMatrix[i][j]
 
                 oldX = x[i]
                 x[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
@@ -52,5 +52,5 @@ if __name__ == '__main__':
     ]
     bs = [1, 28, 76]
     initialGuess = [1, 0, 1]
-    test = test_class.get_solution(a, bs, initialGuess, 0.8)
+    test = test_class.getSolution(a, bs, initialGuess, 0.8, 7)
     print(test)
