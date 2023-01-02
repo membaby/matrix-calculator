@@ -17,14 +17,13 @@ class LUDecomposition:
         self.order = [k + 1 for k in range(self.n)]
         for l in range(self.n):
             self.solution.append(input_matrix[l].pop(self.n))
-        if form == 'crout':
+        if form == 'Crout Form':
             input_matrix = self.transpose(input_matrix)
         flag = self.forward_elimination(input_matrix)
         if flag == 'Singular, no solution':
             return ["The entered matrix is singular\nTherefore, no solution!"], ["No steps found"]
         if form == 'Crout Form':
-            # self.crout(input_matrix)
-            self.doolittle(input_matrix)
+            self.crout(input_matrix)
         elif form == 'Cholesky Form':
             self.cholesky(input_matrix)
         elif form == 'Dolittle Form':
@@ -70,7 +69,7 @@ class LUDecomposition:
                 input_matrix[l][k] = self.round_sig((input_matrix[l][k]) / input_matrix[k][k])
                 for j in range(k + 1, self.n):
                     input_matrix[l][j] = self.round_sig(input_matrix[l][j] - input_matrix[k][j] * input_matrix[l][k])
-
+        print(self.order)
         return "Have a unique solution"
 
     def forward_substitution(self, input_matrix, ones):
@@ -113,26 +112,30 @@ class LUDecomposition:
                 u[k][j] = input_matrix[k][j]
 
         self.solution_steps.append("Crout's LU:")
-        var = []
-        for o in range(self.n):
-            var.append('X' + str(self.order[o]))
-        
+        solution = [0 for _ in range(len(self.solution))]
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
         self.solution_steps.append(['L:'] + l)
         self.solution_steps.append(['U:'] + u)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        self.solution_steps.append(['Solution:'] + solution)
 
         self.solution_steps.append('Transpose & Forward Substitution:')
         input_matrix = self.transpose(input_matrix)
         self.forward_substitution(input_matrix, False)
-        self.solution_steps.append(['L:'] + l)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['U:'] + u)
+        self.solution_steps.append(['Solution:'] + solution)
 
         self.solution_steps.append('Back Substitution:')
         self.back_substitution(input_matrix, True)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
+        solution = copy.deepcopy(self.solution)
         for o in range(self.n):
-            self.solution[self.order[o] - 1] = self.round_sig(self.solution[o])
+            self.solution[self.order[o] - 1] = self.round_sig(solution[o])
 
     def cholesky(self, input_matrix):
         self.reorder()
@@ -154,25 +157,35 @@ class LUDecomposition:
         for o in range(self.n):
             var.append('X' + str(self.order[o]))
         
-        self.solution_steps.append(['L Decomposition:'] + l)
+        self.solution_steps.append(['L:'] + l)
         self.solution_steps.append(['D:'] + d)
         self.solution_steps.append(['U:'] + u)
+        solution = [0 for _ in range(len(self.solution))]
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         self.solution_steps.append('Forward Substitution:')
         self.forward_substitution(input_matrix, True)
-        self.solution_steps.append(['L Decomposition:'] + l)
         self.solution_steps.append(['D:'] + d)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        self.solution_steps.append(['U:'] + u)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         for k in range(self.n):
             self.solution[k] /= input_matrix[k][k]
         
-        self.solution_steps.append(['L:'] + l)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        self.solution_steps.append(['U:'] + u)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         self.solution_steps.append('Back Substitution:')
         self.back_substitution(input_matrix, True)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         for o in range(self.n):
             self.solution[o] = self.round_sig(self.solution[o])
@@ -193,20 +206,26 @@ class LUDecomposition:
         for o in range(self.n):
             var.append('X' + str(self.order[o]))
         
-        self.solution_steps.append(['L Decomposition:'] + l)
-        self.solution_steps.append(['U Decomposition:'] + u)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        self.solution_steps.append(['L:'] + l)
+        self.solution_steps.append(['U:'] + u)
+        solution = [0 for _ in range(len(self.solution))]
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
         
 
         self.forward_substitution(input_matrix, True)
         self.solution_steps.append("\nForward Substitution:")
-        self.solution_steps.append(['L Decomposition:'] + l)
-        self.solution_steps.append(['U Decomposition:'] + u)
-        self.solution_steps.append(['Solution:'] + self.solution)
+        self.solution_steps.append(['U:'] + u)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         self.back_substitution(input_matrix, False)
         self.solution_steps.append("\n Back substitution:")
-        self.solution_steps.append(['Solution:'] + self.solution)
+        for idx in range(len(self.solution)):
+            solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
+        self.solution_steps.append(['Solution:'] + solution)
 
         for o in range(self.n):
             self.solution[o] = self.round_sig(self.solution[o])
