@@ -6,7 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1e201248-4eae-4194-b32d-41802f2a164f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations/lu-decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/lu-decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/Bisection.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/Bisection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/FixedPoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/FixedPoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/GaussElimination.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/GaussElimination.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/GaussJordan.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/GaussJordan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/GaussSeidel.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/GaussSeidel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/Jacobi.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/Jacobi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/LUdecomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/LUdecomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/NewtonRaphson.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/NewtonRaphson.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/RegulaFalsi.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/RegulaFalsi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/secant.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/secant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operations/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/operations/solver.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +35,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yahya/OneDrive/Desktop/coding/matrix calculator&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/yahya/OneDrive/Desktop/coding/matrix calculator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -47,6 +59,7 @@
       <workItem from="1671558617560" duration="1234000" />
       <workItem from="1671564017742" duration="629000" />
       <workItem from="1671640312961" duration="1537000" />
+      <workItem from="1672645311275" duration="887000" />
     </task>
     <servers />
   </component>
@@ -65,7 +78,16 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/matrix_calculator$Bisection.coverage" NAME="Bisection Coverage Results" MODIFIED="1672405335520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/matrix_calculator$RegulaFalsi.coverage" NAME="RegulaFalsi Coverage Results" MODIFIED="1672405426781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$Jacobi.coverage" NAME="Jacobi Coverage Results" MODIFIED="1672612430743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$Bisection.coverage" NAME="Bisection Coverage Results" MODIFIED="1672600991932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
     <SUITE FILE_PATH="coverage/matrix_calculator$lu_decomposition.coverage" NAME="lu-decomposition Coverage Results" MODIFIED="1671641842425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$GaussJordan.coverage" NAME="GaussJordan Coverage Results" MODIFIED="1672612546994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$RegulaFalsi.coverage" NAME="RegulaFalsi Coverage Results" MODIFIED="1672602035660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
     <SUITE FILE_PATH="coverage/matrix_calculator$GaussElimination.coverage" NAME="GaussElimination Coverage Results" MODIFIED="1671559986089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$GaussElimination.coverage" NAME="GaussElimination Coverage Results" MODIFIED="1672612338276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/Bisection_py$LUdecomposition.coverage" NAME="LUdecomposition Coverage Results" MODIFIED="1672612341451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/operations" />
+    <SUITE FILE_PATH="coverage/interface_py$interface.coverage" NAME="interface Coverage Results" MODIFIED="1672644896486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

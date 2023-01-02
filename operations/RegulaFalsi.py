@@ -7,7 +7,8 @@ class RegulaFalsi:
         self.operation_name = 'False Position'
         self.solution_steps = []
 
-    def round_sig(self, sig, x):
+    @staticmethod
+    def round_sig(sig, x):
         if x == 0:
             return 0
         return round(x, sig - int(floor(log10(abs(x)))) - 1)
@@ -74,7 +75,7 @@ if __name__ == '__main__':
     test_class = RegulaFalsi()
     test = "x**2*(x-0.165)+3.993*10**-4"
 
-    s, ss = test_class.regula_falsi(test, 0, 0.11, 0.0001, 5)
+    s, ss = test_class.regula_falsi(test, 0, 0.11, 0.0001, 5, 100)
     print(s)
     for i in range(len(ss)):
         print(ss[i])

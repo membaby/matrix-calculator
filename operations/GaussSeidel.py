@@ -7,7 +7,8 @@ class GaussSeidel:
         self.solution = []
         self.solution_steps = []
     
-    def round_sig(self, x, sig):
+    @staticmethod
+    def round_sig(x, sig):
         if x == 0:
             return 0
         return round(x, sig-int(floor(log10(abs(x))))-1)
@@ -19,7 +20,7 @@ class GaussSeidel:
         x = initialGuess
         maxNoIterations = MAX
         e = relativeError
-        while (maxNoIterations != 0 and e >= relativeError):
+        while maxNoIterations != 0 and e >= relativeError:
             e = 0
             for i in range(len(b)):
                 numerator = b[i]
@@ -31,7 +32,7 @@ class GaussSeidel:
                     
                 x[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
                 newX = x[i]
-                if x[i] != 0 :
+                if x[i] != 0:
                     newError = (abs(newX - oldX) / abs(newX)) * 100
                     e = max(e, newError)
             

@@ -1,5 +1,6 @@
 from math import log10, floor
 
+
 class GaussElimination:
     def __init__(self):
         self.operation_name = 'Gauss Elimination'
@@ -7,7 +8,7 @@ class GaussElimination:
         self.solutions = []
         self.solution_steps = []
         self.sig = 5
-    
+
     def round_sig(self, x):
         if x == 0:
             return 0
@@ -24,14 +25,15 @@ class GaussElimination:
                 for idx in range(len(self.solutions)):
                     self.solutions[idx] = f'X{idx} = ' + str(self.solutions[idx])
                 return self.solutions, self.solution_steps
-           
+
                 # return [round(x, 8) for x in self.solutions], self.solution_steps
             elif flag == 'Singular and have no solution':
                 return ['The entered matrix is singular\nTherefore, no solution!'], ['No steps found']
             else:
                 return self.infinite_number(input_matrix, flag), self.solution_steps
         except:
-            return ['Infinite number of solutions!'], ['An infinite number of solutions was found for this set of equations!'] 
+            return ['Infinite number of solutions!'], [
+                'An infinite number of solutions was found for this set of equations!']
 
     def forward_elimination(self, input_matrix):
         for k in range(self.n):
@@ -39,9 +41,9 @@ class GaussElimination:
             i_max = k
             v_max = input_matrix[i_max][k]
 
-            for i in range(k + 1, self.n):
+            for i in range(k, self.n):
                 max_in_row = 0
-                for j in range(i, self.n + 1):
+                for j in range(k, self.n + 1):
                     max_in_row = max(abs(input_matrix[i][j]), abs(max_in_row))
 
                 if abs(input_matrix[i][k] / max_in_row > v_max):

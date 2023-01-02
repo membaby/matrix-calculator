@@ -1,4 +1,3 @@
-import parser
 from math import *
 
 
@@ -7,18 +6,17 @@ class Bisection:
         self.operation_name = 'Bisection'
         self.solution_steps = []
 
-    def round_sig(self, sig, x):
+    @staticmethod
+    def round_sig(sig, x):
         if x == 0:
             return 0
         return round(x, sig - int(floor(log10(abs(x)))) - 1)
 
     def bisection(self, eq, low, up, error, precision, max_iterations):
         estimate_roots = [low, up]
-        # code = parser.expr(eq).compile()
         code = str(eq)
         up = self.round_sig(precision, up)
         x = up
-        print(code)
         up_eval = self.round_sig(precision, eval(code))
         low = self.round_sig(precision, low)
         x = low

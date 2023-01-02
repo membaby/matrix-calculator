@@ -8,7 +8,8 @@ class JacobiIteration:
         self.solution = []
         self.solution_steps = []
     
-    def round_sig(self, x, sig=5):
+    @staticmethod
+    def round_sig(x, sig=5):
         if x == 0:
             return 0
         return round(x, sig-int(floor(log10(abs(x))))-1)
@@ -21,7 +22,7 @@ class JacobiIteration:
         maxNoIterations = MAX
         e = relativeError
 
-        while (maxNoIterations != 0 and e >= relativeError):
+        while maxNoIterations != 0 and e >= relativeError:
             e = 0
             for i in range(len(b)):
                 numerator = b[i]
@@ -30,9 +31,9 @@ class JacobiIteration:
                         numerator -= x[j]*coefficientMatrix[i][j]
                 temp[i] = self.round_sig(numerator / coefficientMatrix[i][i], precision)
 
-            #take e after each iterartion 
+            # take e after each iteration
             for i in range(len(b)):
-                if temp[i] != 0 :
+                if temp[i] != 0:
                     newError = (abs(temp[i]-x[i]) / abs(temp[i])) * 100
                     e = max(e, newError)
 
@@ -55,5 +56,5 @@ if __name__ == '__main__':
     ]
     bs = [1, 28, 76]
     initialGuess = [1, 0, 1]
-    test = test_class.get_solution(a, bs, initialGuess, 0.8)
+    test = test_class.getSolution(a, bs, initialGuess, 0.8, 10)
     print(test)

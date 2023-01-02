@@ -1,6 +1,6 @@
 import copy
-import time
 from math import log10, floor
+
 
 class LUDecomposition:
     def __init__(self):
@@ -28,12 +28,12 @@ class LUDecomposition:
             self.cholesky(input_matrix)
         elif form == 'Dolittle Form':
             self.doolittle(input_matrix)
-        
+
         for idx in range(len(self.solution)):
             self.solution[idx] = f'X{idx} = ' + str(self.solution[idx])
 
         return self.solution, self.solution_steps
-    
+
     def round_sig(self, x):
         if x == 0:
             return 0
@@ -44,9 +44,9 @@ class LUDecomposition:
             i_max = k
             v_max = input_matrix[k][k]
 
-            for l in range(k + 1, self.n):
+            for l in range(k, self.n):
                 max_in_row = 0
-                for j in range(l, self.n):
+                for j in range(k, self.n):
                     max_in_row = max(abs(input_matrix[l][j]), abs(max_in_row))
 
                 if max_in_row and abs(input_matrix[l][k] / max_in_row > v_max):
@@ -69,7 +69,6 @@ class LUDecomposition:
                 input_matrix[l][k] = self.round_sig((input_matrix[l][k]) / input_matrix[k][k])
                 for j in range(k + 1, self.n):
                     input_matrix[l][j] = self.round_sig(input_matrix[l][j] - input_matrix[k][j] * input_matrix[l][k])
-        print(self.order)
         return "Have a unique solution"
 
     def forward_substitution(self, input_matrix, ones):
@@ -156,7 +155,7 @@ class LUDecomposition:
         var = []
         for o in range(self.n):
             var.append('X' + str(self.order[o]))
-        
+
         self.solution_steps.append(['L:'] + l)
         self.solution_steps.append(['D:'] + d)
         self.solution_steps.append(['U:'] + u)
@@ -175,7 +174,7 @@ class LUDecomposition:
 
         for k in range(self.n):
             self.solution[k] /= input_matrix[k][k]
-        
+
         self.solution_steps.append(['U:'] + u)
         for idx in range(len(self.solution)):
             solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
@@ -205,14 +204,13 @@ class LUDecomposition:
         var = []
         for o in range(self.n):
             var.append('X' + str(self.order[o]))
-        
+
         self.solution_steps.append(['L:'] + l)
         self.solution_steps.append(['U:'] + u)
         solution = [0 for _ in range(len(self.solution))]
         for idx in range(len(self.solution)):
             solution[idx] = f'X{self.order[idx]} = ' + str(self.solution[idx])
         self.solution_steps.append(['Solution:'] + solution)
-        
 
         self.forward_substitution(input_matrix, True)
         self.solution_steps.append("\nForward Substitution:")
@@ -241,18 +239,9 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 2, 8]
     ]
 
-    test = test_class.getSolution(copy.deepcopy(test_matrix), 'crout', 10)
+    test = test_class.getSolution(copy.deepcopy(test_matrix), 'Crout Form', 10)
     print(test)
 
-    # start = time.time()
-    # # print(test[0])
-    # test = test_class.get_solution(copy.deepcopy(test_matrix), 'crout')
-    # end = time.time()
-    # print(end-start)
-
-    # start = time.time()
-    # # print(test[0])
-    # test = test_class.get_solution(copy.deepcopy(test_matrix), 'cholesky')
-    # end = time.time()
-    # print(end-start)
-    # print(test[0])
+    # 'Dolittle Form'
+    # 'Crout Form'
+    # 'Cholesky Form'

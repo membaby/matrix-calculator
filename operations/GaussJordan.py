@@ -9,13 +9,15 @@ class GaussJordan:
         self.solution = []
         self.solution_steps = []
 
-    def round_sig(self, x, digits=6):
+    @staticmethod
+    def round_sig(x, digits=6):
         if x == 0 or not math.isfinite(x):
             return x
         digits -= math.ceil(math.log10(abs(x)))
         return round(x, digits)
 
-    def partialPivoting(self, input_matrix, b, rows, curr):
+    @staticmethod
+    def partialPivoting(input_matrix, b, rows, curr):
         # find the pivot row
         pivot = curr
         for i in range(curr + 1, rows):
@@ -32,7 +34,8 @@ class GaussJordan:
             b[curr] = b[pivot]
             b[pivot] = aug_tmp
 
-    def checkRank(self, input_matrix):
+    @staticmethod
+    def checkRank(input_matrix):
         rank = np.linalg.matrix_rank(input_matrix)
         return rank
 
