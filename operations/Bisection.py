@@ -14,9 +14,11 @@ class Bisection:
 
     def bisection(self, eq, low, up, error, precision, max_iterations):
         estimate_roots = [low, up]
-        code = parser.expr(eq).compile()
+        # code = parser.expr(eq).compile()
+        code = str(eq)
         up = self.round_sig(precision, up)
         x = up
+        print(code)
         up_eval = self.round_sig(precision, eval(code))
         low = self.round_sig(precision, low)
         x = low
@@ -70,8 +72,8 @@ class Bisection:
 
 if __name__ == '__main__':
     test_class = Bisection()
-    test = "x**3-0.165*x**2+3.993*10**-4"
+    test = "exp(x)"
 
-    s, ss = test_class.bisection(test, 0, 0.11, 0.0001, 5)
+    s, ss, sss = test_class.bisection(test, 0, 0.11, 0.0001, 5, 100)
     for i in range(len(ss)):
         print(ss[i])

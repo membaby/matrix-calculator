@@ -54,15 +54,17 @@ class NewtonRaphson:
 
         
         # Creating Data for the Line
-        x_plot = np.linspace(-2, 2, 1000)
-        y_plot = f(x_plot)
+        x_plot = np.linspace(-100, 100, 1000)
+        f2 = np.vectorize(f)
+        f3 = np.vectorize(f_derivative)
+        y_plot = f2(x_plot)
         
         # Plotting Function
         fig = plt.figure()
         plt.plot(self.estimate_roots,np.zeros(len(self.estimate_roots)), 'og')
         plt.plot([-100, 100],[0,0],'k')
         plt.plot(x_plot, y_plot, c='blue')
-        plt.plot(x_plot, f_derivative(x_plot), c='green')
+        plt.plot(x_plot, f3(x_plot), c='green')
         # plt.xlim(min([x for x in self.estimate_roots])-2, max([x for x in self.estimate_roots])+2)
         plt.xlim([-10, 10])
         plt.ylim([-2, 2])
@@ -74,7 +76,7 @@ class NewtonRaphson:
 
 if __name__ == '__main__':
     test_class = NewtonRaphson()
-    inFunc = 'x**2*(x-0.165)+3.993*10**-4'
+    inFunc = 'exp(x)'
     initialGuess = 0.5
     error = 0.00001
     iterations = 100

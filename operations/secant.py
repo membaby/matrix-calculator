@@ -52,14 +52,16 @@ class Secant:
         
         # Creating Data for the Line
         x_plot = np.linspace(-100, 100, 1000)
-        y_plot = f(x_plot)
+        f2 = np.vectorize(f)
+        f3 = np.vectorize(f_derivative)
+        y_plot = f2(x_plot)
         
         # Plotting Function
         fig = plt.figure()
         plt.plot(self.estimate_roots,np.zeros(len(self.estimate_roots)), 'og')
         plt.plot([-100, 100],[0,0],'k')
         plt.plot(x_plot, y_plot, c='blue')
-        plt.plot(x_plot, f_derivative(x_plot), c='orange')
+        plt.plot(x_plot, f3(x_plot), c='orange')
         # for x, y in self.lines:
         #     plt.plot([x, x], [x, y], 'g')
         #     plt.plot([x, y], [y, y], 'g')

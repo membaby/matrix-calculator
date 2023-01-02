@@ -7,13 +7,13 @@ import sympy as sp
 import re
 import matplotlib.pyplot as plt
 import numpy as np
-import parser
 from operations.solver import Solver
 from operations.Bisection import Bisection
 from operations.RegulaFalsi import RegulaFalsi
 from operations.NewtonRaphson import NewtonRaphson
 from operations.FixedPoint import FixedPoint
 from operations.secant import Secant
+from math import *
 
 TITLE = 'Matrix Calculator'
 
@@ -27,11 +27,11 @@ class Calculator(QWidget):
       # Data Storage
       self.PREV_MATRICES = []
       self.PREV_FUNCTIONS = []
-      self.DEFAULT_PRECISION = 6
+      self.DEFAULT_PRECISION = 1000
       self.DEFAULT_MATRIX_SIZE = 3
       self.DEFAULT_INITIAL_GUESS = 0
-      self.DEFAULT_ITERATIONS = 200
-      self.DEFAULT_TOLERANCE = 0.005
+      self.DEFAULT_ITERATIONS = 50
+      self.DEFAULT_TOLERANCE = 0.00001
       self.DEFAULT_LowerBoundary = -10
       self.DEFAULT_UpperBoundary = 10
       self.DEFAULT_InitialGuess = 0
@@ -103,14 +103,6 @@ class Calculator(QWidget):
       self.txt_rootfinder_UpperBoundary = QLineEdit()
       self.txt_rootfinder_InitialGuess = QLineEdit()
       self.txt_rootfinder_InitialGuess2 = QLineEdit()
-
-      self.txt_rootfinder_funciton.setText('x**2*(x-0.165)+3.993*10**-4')
-      self.txt_rootfinder_EPS.setText('0.00001')
-      self.txt_rootfinder_MaxIterations.setText('100')
-      self.txt_rootfinder_LowerBoundary.setText('0')
-      self.txt_rootfinder_UpperBoundary.setText('3')
-      self.txt_rootfinder_InitialGuess.setText('0.5')
-
       
       self.btn_rootfinder_reset = QPushButton('Clear')
       self.btn_rootfinder_reset.setStyleSheet('QPushButton {color: red;}')
@@ -321,7 +313,7 @@ class Calculator(QWidget):
       self.display('[INFO]: Matrix Cleared')
       
    def solve(self, rootfinder=False):
-      # try:
+      try:
          if not rootfinder:
             start = time.time()
             self.display('[PROGRESS] Getting ready to solve the matrix...')
@@ -404,24 +396,26 @@ class Calculator(QWidget):
                self.display(f'[INFO] Solution is ready! ({total_time} seconds taken!)', rootfinder=True)
                self.saveMatrix(rootfinder=True)
 
-      # except Exception as err:
-      #    print(err)
-      #    self.display('[ERROR] Something went wrong! Please try again!')
+      except Exception as err:
+         print(err)
+         self.display('[ERROR] Something went wrong! Please try again!')
    
    def plot(self, method, equation, task, estimate_roots):
       x = np.linspace(task['lower_boundary'], task['upper_boundary'],1000)
       plt.plot([-100, 100],[0,0],'k')  # plotting horizontal line at y=0
+      print(equation)
       f = lambda x: eval(equation)
-
+      print('OK')
+      f2 = np.vectorize(f)
       if method in ['Bisection', 'False Position']:
-         plt.plot(x, f(x)) # plotting the function
+         plt.plot(x, f2(x)) # plotting the function
          plt.plot(estimate_roots[:-1],np.zeros(len(estimate_roots)-1), 'or')   # plotting the roots
          plt.plot(estimate_roots[-1:],np.zeros(1), 'og')   # plotting the roots
          plt.xlim(task['lower_boundary'], task['upper_boundary'])
          plt.ylim(-0.5, 3)
       elif method in ['Fixed Point']:
          xx = np.arange(0, 6, 0.1)
-         plt.plot(xx, f(xx), 'b')
+         plt.plot(xx, f2(xx), 'b')
          plt.plot(xx, xx, 'r')
          for x, y in estimate_roots:
             plt.plot([x, x], [x, y], 'g')
