@@ -1,6 +1,10 @@
 # Matrix Solver Calculator
 A simple GUI-based Desktop Application that solves linear equations in form of matrices with providing the final solution and solving steps. It is a part of a large project made for the Numerical Analysis course at Alexandria University.
 
+<p align="center">
+   <img src="https://imgur.com/ceGy0nH.png" height="500">
+</p>
+
 ## Installation
 
 ### Pre-Requisites:
